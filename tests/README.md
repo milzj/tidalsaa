@@ -1,0 +1,1 @@
+- test_fw4pde.py provides a simple test aimed at verifying whether the installation of https://github.com/milzj/FW4PDE/tree/pip was successful. 

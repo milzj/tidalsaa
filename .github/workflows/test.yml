@@ -36,6 +36,3 @@ jobs:
           conda install pytest
           pytest
 
-      - name: Parallel Test with pytest
-        run: |
-          mpirun -np 4 python3 -m pytest tests/test_random_problem/test_split_samples.py

@@ -11,4 +11,4 @@ dependencies:
   - matplotlib=3.4.2
   - dolfin-adjoint=2019.1.0
   - pip:
-      - git+https://github.com/milzj/FW4PDE.git@pip
+      - git+https://github.com/milzj/FW4PDE.git@pip-tidal

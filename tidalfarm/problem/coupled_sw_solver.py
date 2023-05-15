@@ -1,7 +1,7 @@
 from dolfin import *
 from dolfin_adjoint import *
 
-from base import BoundaryConditionSet
+from .base import BoundaryConditionSet
 
 class CoupledSWSolver(object):
 

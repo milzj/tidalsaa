@@ -1,9 +1,9 @@
 from dolfin import *
 from dolfin_adjoint import *
 
-from base import RectangularDomain
-from domain_parameters import DomainParameters
-from farm_domain import FarmDomain
+from .base import RectangularDomain
+from .domain_parameters import DomainParameters
+from .farm_domain import FarmDomain
 
 class DomainFarm(object):
 

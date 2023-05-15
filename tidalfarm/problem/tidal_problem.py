@@ -1,7 +1,7 @@
 from dolfin import *
 from dolfin_adjoint import *
 
-from coupled_sw_solver import CoupledSWSolver
+from .coupled_sw_solver import CoupledSWSolver
 
 
 class TidalProblem(object):
@@ -9,6 +9,7 @@ class TidalProblem(object):
     def __init__(self, tidal_parameters, domain_mesh):
 
         set_working_tape(Tape())
+
         self.tidal_parameters = tidal_parameters
         self.domain_mesh = domain_mesh
 

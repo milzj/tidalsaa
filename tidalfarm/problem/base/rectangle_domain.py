@@ -41,7 +41,7 @@ class RectangularDomain(Domain):
 
     def __init__(self, x0, y0, x1, y1, nx, ny):
         #: A :class:`Mesh` containing the mesh.
-        mpi_comm = MPI.comm_world
+        mpi_comm = MPI.comm_self
         self.mesh = RectangleMesh(mpi_comm, Point(x0, y0),
                 Point(x1, y1), nx, ny)
 

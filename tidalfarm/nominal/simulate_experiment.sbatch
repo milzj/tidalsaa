@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#SBATCH -J tidal-nominal                    # Job name
+#SBATCH --account=gts-jmilz3                     # charge account
+#SBATCH -N 48 --ntasks-per-node=1                  # number of nodes and cores per node
+#SBATCH --mem-per-cpu=16gb                        # Memory per core
+#SBATCH -qinferno                               # QOS Name
+#SBATCH -o output/Report-%x-%j.out                         # Combined output and error messages file
+#SBATCH --mail-type=ALL              # Mail preferences
+#SBATCH --mail-user=jmilz3@gatech.edu
+#SBATCH --time=24:00:00
+
+cd $HOME/tidalsaa/tidalfarm/nominal
+
+module load anaconda3/2022.05.0.1
+conda activate SAA4PDE
+module load gcc
+
+export PYTHONPATH=$HOME/tidalsaa:${PYTHONPATH}
+
+date=$(date '+%d-%b-%Y-%H-%M-%S')
+
+# mpiexec -n 5 python simulate_experiment.py $date
+python simulate_experiment.py $date

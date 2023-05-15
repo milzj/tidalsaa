@@ -4,8 +4,14 @@ from dolfin import *
 import matplotlib.pyplot as plt
 plt.rcParams['text.usetex'] = True
 
-from rectangle_domain import RectangularDomain
+from base.rectangle_domain import RectangularDomain
 from domain_parameters import DomainParameters
+
+
+import os
+outdir = "output/"
+if not os.path.exists(outdir):
+   os.makedirs(outdir)
 
 
 domain_parameters = DomainParameters()
@@ -13,7 +19,7 @@ x_min = domain_parameters.x_min
 x_max = domain_parameters.x_max
 y_min = domain_parameters.y_min
 y_max = domain_parameters.y_max
-n = 100
+n = 20
 
 domain = RectangularDomain(x_min, y_min, x_max, y_max, nx=n, ny=n)
 mesh = domain.mesh

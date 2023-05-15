@@ -17,9 +17,9 @@ import numpy as np
 from dolfin import *
 from dolfin_adjoint import *
 
-from domain_farm import DomainFarm
-from tidal_parameters import TidalParameters
-from tidal_problem import TidalProblem
+from tidalfarm.problem.domain_farm import DomainFarm
+from tidalfarm.problem.tidal_parameters import TidalParameters
+from tidalfarm.problem.tidal_problem import TidalProblem
 
 import moola
 import matplotlib.pyplot as plt
@@ -27,7 +27,7 @@ import matplotlib.pyplot as plt
 set_log_level(30)
 
 import fw4pde
-from solver_options import SolverOptions
+from tidalfarm.solver_options import SolverOptions
 
 
 # Tidal farm problem

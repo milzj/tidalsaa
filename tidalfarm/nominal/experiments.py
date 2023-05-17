@@ -21,6 +21,17 @@ class Experiments(object):
         bottom_friction_vec.append(Constant(0.001))
         bottom_friction_vec.append(Constant(0.0035))
 
+        bottom_friction_vec.append(Constant(0.002))
+        bottom_friction_vec.append(Constant(0.003))
+        bottom_friction_vec.append(Constant(0.004))
+        bottom_friction_vec.append(Constant(0.006))
+        bottom_friction_vec.append(Constant(0.007))
+
+        bottom_friction_vec.append(Constant(0.010))
+        bottom_friction_vec.append(Constant(0.020))
+        bottom_friction_vec.append(Constant(0.030))
+        bottom_friction_vec.append(Constant(0.040))
+        bottom_friction_vec.append(Constant(0.050))
 
         self._experiments[name] = {"bottom_friction": bottom_friction_vec}
 

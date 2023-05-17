@@ -1,4 +1,3 @@
-
 import os, sys
 
 
@@ -9,6 +8,7 @@ from dolfin_adjoint import *
 from tidalfarm.problem.domain_farm import DomainFarm
 from tidalfarm.problem.tidal_parameters import TidalParameters
 from tidalfarm.problem.tidal_problem import TidalProblem
+from tidalfarm.problem.riesz_map import RieszMap
 from tidalfarm.solver_options import SolverOptions
 
 import moola
@@ -23,14 +23,23 @@ experiments = Experiments()
 experiment_name = "Bottom_Friction"
 
 
-date = sys.argv[1]
 
-_outdir = "output/" + experiment_name + "/" + date + "/"
+print(MPI.comm_world.Get_rank())
+print(MPI.comm_world.Get_size())
 
 if MPI.comm_world.Get_rank() == 0:
+    date = sys.argv[1]
+    _outdir = "output/" + experiment_name + "/" + date + "/"
+
     if not os.path.exists(_outdir):
         os.makedirs(_outdir)
 
+else:
+    date = None
+    _outdir = None
+
+date = MPI.comm_world.bcast(date, root=0)
+_outdir = MPI.comm_world.bcast(_outdir, root=0)
 
 bottom_frictions = experiments(experiment_name)["bottom_friction"]
 mpi_rank = MPI.comm_world.Get_rank()
@@ -67,7 +76,9 @@ rf = ReducedFunctional(J, ctrl)
 
 # Optimization problem
 problem = MoolaOptimizationProblem(rf)
-u_moola = moola.DolfinPrimalVector(control)
+riesz_map = RieszMap(control_space)
+u_moola = moola.DolfinPrimalVector(control, riesz_map = riesz_map)
+u_moola.zero()
 
 box_constraints = fw4pde.problem.BoxConstraints(control_space, lb, ub)
 moola_box_lmo = fw4pde.algorithms.MoolaBoxLMO(box_constraints.lb, box_constraints.ub, beta)

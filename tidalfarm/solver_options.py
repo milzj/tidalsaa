@@ -5,7 +5,7 @@ class SolverOptions(object):
 
     def __init__(self):
 
-        maxiter = 2
+        maxiter = 100
         gtol = 1e-4
         ftol = -np.inf
 

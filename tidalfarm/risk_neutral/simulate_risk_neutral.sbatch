@@ -10,14 +10,13 @@
 #SBATCH --mail-user=jmilz3@gatech.edu
 #SBATCH --time=01:15:00
 
-cd $HOME/tidalsaa/tidalfarm/nominal
+cd $HOME/tidalsaa/tidalfarm/risk_neutral
 
 module load anaconda3/2022.05.0.1
 conda activate tidalsaa
 module load gcc
 
 export PYTHONPATH=$HOME/tidalsaa:${PYTHONPATH}
-
 
 date=$(date '+%d-%b-%Y-%H-%M-%S')
 source problem_data.sh

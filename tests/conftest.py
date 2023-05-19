@@ -2,7 +2,7 @@ from pathlib import Path
 import sys
 
 here = Path(__file__).parent
-sys.path.insert(0, str(here.parent) + "/mcrnnoc")
+sys.path.insert(0, str(here.parent) + "/tidalfarm")
 
 import pytest
 import numpy as np

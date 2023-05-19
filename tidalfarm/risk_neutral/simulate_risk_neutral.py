@@ -18,7 +18,39 @@ import fw4pde
 import matplotlib.pyplot as plt
 
 
-outdir = "output/"
+
+if MPI.comm_world.Get_rank() == 0:
+
+    date = sys.argv[1]
+    m = int(sys.argv[2])
+    a = float(sys.argv[3])
+    b = float(sys.argv[4])
+    std = float(sys.argv[5])
+    loc = float(sys.argv[6])
+
+    _outdir = "output/" + date + "/"
+
+    if not os.path.exists(_outdir):
+        os.makedirs(_outdir)
+
+else:
+    date = None
+    _outdir = None
+    m = None
+    a = None
+    b = None
+    std = None
+    loc = None
+
+
+date = MPI.comm_world.bcast(date, root=0)
+outdir = MPI.comm_world.bcast(_outdir, root=0)
+m = MPI.comm_world.bcast(m, root=0)
+a = MPI.comm_world.bcast(a, root=0)
+b = MPI.comm_world.bcast(b, root=0)
+std = MPI.comm_world.bcast(std, root=0)
+loc = MPI.comm_world.bcast(loc, root=0)
+
 
 random_problem = RandomTidalfarmProblem()
 control_space = random_problem.control_space
@@ -29,18 +61,11 @@ beta = random_problem.beta
 lb = random_problem.lb
 ub = random_problem.ub
 scaled_L1_norm = fw4pde.problem.ScaledL1Norm(control_space,beta)
-bottom_friction = Constant(0.016)
+bottom_friction = 0.016
 J = random_problem(control, bottom_friction)
 
 ctrl = Control(control)
-# rf = ReducedFunctional(J, ctrl)
 
-#
-m=2
-loc = 0.0025
-a = 0.0
-b = 1.0
-std = 10.0*loc
 
 number_samples = 2**m
 sampler = TidalfarmSampler(d=1, m=m, loc=loc, a=a, b=b, std=std)
@@ -72,8 +97,8 @@ n = random_problem.tidal_problem.domain_mesh.n
 plt.set_cmap("coolwarm")
 c = plot(solution_final)
 plt.colorbar(c)
-plt.savefig(outdir + "solution_final_n_{}.pdf".format(n))
-plt.savefig(outdir + "solution_final_n_{}.png".format(n))
+plt.savefig(outdir + "solution_final_n_{}.pdf".format(n), bbox_inches="tight")
+plt.savefig(outdir + "solution_final_n_{}.png".format(n), bbox_inches="tight")
 plt.close()
 
 solution_best = sol["control_best"].data
@@ -88,8 +113,8 @@ plt.gca().set_ylabel("meters")
 cb = plt.colorbar(c, label="Turbine density", shrink=1, orientation="horizontal")
 # https://stackoverflow.com/questions/34458949/matplotlib-colorbar-formatting
 cb.ax.xaxis.set_major_formatter(plt.FuncFormatter('{:.0f}%'.format))
-plt.savefig(outdir + "solution_best_n_{}.pdf".format(n))
-plt.savefig(outdir + "solution_best_n_{}.png".format(n))
+plt.savefig(outdir + "solution_best_n_{}.pdf".format(n), bbox_inches="tight")
+plt.savefig(outdir + "solution_best_n_{}.png".format(n), bbox_inches="tight")
 plt.close()
 plt.close()
 

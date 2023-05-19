@@ -47,7 +47,12 @@ mpi_rank = MPI.comm_world.Get_rank()
 bottom_friction = bottom_frictions[mpi_rank]
 bottom_friction_value = bottom_friction.values()[0]
 
-outdir = _outdir + "bottom_friction_{}/".format(bottom_friction_value)
+# Tidal farm problem
+tidal_parameters = TidalParameters()
+tidal_parameters.bottom_friction = bottom_friction
+viscosity_value = tidal_parameters.viscosity.values()[0]
+
+outdir = _outdir + "bottom_friction_{}_viscosity_{}/".format(bottom_friction_value, viscosity_value)
 
 if not os.path.exists(outdir):
     os.makedirs(outdir)
@@ -56,9 +61,6 @@ print("-"*40)
 print("Bottom friction = {}".format(bottom_friction_value))
 print("-"*40)
 
-# Tidal farm problem
-tidal_parameters = TidalParameters()
-tidal_parameters.bottom_friction = bottom_friction
 
 domain_farm = DomainFarm()
 tidal_problem = TidalProblem(tidal_parameters, domain_farm)

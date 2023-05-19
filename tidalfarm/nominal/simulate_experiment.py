@@ -20,7 +20,7 @@ set_log_level(30)
 from experiments import Experiments
 
 experiments = Experiments()
-experiment_name = "Bottom_Friction"
+experiment_name = "Bottom_Friction_Viscosity"
 
 
 
@@ -41,16 +41,17 @@ else:
 date = MPI.comm_world.bcast(date, root=0)
 _outdir = MPI.comm_world.bcast(_outdir, root=0)
 
-bottom_frictions = experiments(experiment_name)["bottom_friction"]
 mpi_rank = MPI.comm_world.Get_rank()
+experiment = experiments(experiment_name)
 
-bottom_friction = bottom_frictions[mpi_rank]
-bottom_friction_value = bottom_friction.values()[0]
+
+bottom_friction, viscosity = experiment[("bottom_friction", "viscosity")][mpi_rank]
+bottom_friction_value, viscosity_value = bottom_friction.values()[0], viscosity.values()[0]
 
 # Tidal farm problem
 tidal_parameters = TidalParameters()
 tidal_parameters.bottom_friction = bottom_friction
-viscosity_value = tidal_parameters.viscosity.values()[0]
+tidal_parameters.viscosity = viscosity
 
 outdir = _outdir + "bottom_friction_{}_viscosity_{}/".format(bottom_friction_value, viscosity_value)
 
@@ -58,7 +59,7 @@ if not os.path.exists(outdir):
     os.makedirs(outdir)
 
 print("-"*40)
-print("Bottom friction = {}".format(bottom_friction_value))
+print("Bottom friction = {}, viscosity = {}".format(bottom_friction_value, viscosity_value))
 print("-"*40)
 
 
@@ -101,16 +102,29 @@ n = tidal_problem.domain_mesh.n
 plt.set_cmap("coolwarm")
 c = plot(solution_final)
 plt.colorbar(c)
-plt.savefig(outdir + "solution_final_n_{}.pdf".format(n))
-plt.savefig(outdir + "solution_final_n_{}.png".format(n))
+plt.savefig(outdir + "solution_final_n_{}_friction_{}_viscosity_{}.pdf".format(n, bottom_friction_value, viscosity_value))
+plt.savefig(outdir + "solution_final_n_{}_friction_{}_viscosity_{}.png".format(n, bottom_friction_value, viscosity_value))
 plt.close()
 
 solution_best = sol["control_best"].data
-c = plot(solution_best)
-plt.colorbar(c)
-plt.savefig(outdir + "solution_best_n_{}.pdf".format(n))
-plt.savefig(outdir + "solution_best_n_{}.png".format(n))
+u_vec = solution_best.vector()[:]
+scaling = 100.0/max(u_vec)
+_control = Function(control_space)
+_control.vector()[:] = scaling*u_vec
+plt.set_cmap("coolwarm")
+c = plot(_control)
+plt.gca().set_xlabel("meters")
+plt.gca().set_ylabel("meters")
+cb = plt.colorbar(c, label="Turbine density", shrink=1, orientation="horizontal")
+# https://stackoverflow.com/questions/34458949/matplotlib-colorbar-formatting
+cb.ax.xaxis.set_major_formatter(plt.FuncFormatter('{:.0f}%'.format))
+plt.savefig(outdir + "solution_best_n_{}_friction_{}_viscosity_{}.pdf".format(n, bottom_friction_value, viscosity_value))
+plt.savefig(outdir + "solution_best_n_{}_friction_{}_viscosity_{}.png".format(n, bottom_friction_value, viscosity_value))
 plt.close()
+plt.close()
+
+
+
 
 filename = outdir + "solution_best_n={}.txt".format(n)
 np.savetxt(filename, solution_best.vector()[:])

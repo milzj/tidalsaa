@@ -8,7 +8,7 @@ class Experiments(object):
 
         self._experiments = {}
 
-        name = "Bottom_Friction"
+        name = "Bottom_Friction_Viscosity"
         # Bottom friction also called (quadratic) bed roughness coefﬁcient
         # or natural bed friction coefficient:
         # compare with eq. (3.1) in Kreitmair (2021)
@@ -21,22 +21,39 @@ class Experiments(object):
         bottom_friction_vec.append(Constant(0.001))
         bottom_friction_vec.append(Constant(0.0035))
 
-        bottom_friction_vec.append(Constant(0.002))
-        bottom_friction_vec.append(Constant(0.003))
-        bottom_friction_vec.append(Constant(0.004))
-        bottom_friction_vec.append(Constant(0.006))
-        bottom_friction_vec.append(Constant(0.007))
+        viscosities = [1.0, 2.0, 3.0, 4.0, 5.0]
 
-        bottom_friction_vec.append(Constant(0.010))
-        bottom_friction_vec.append(Constant(0.020))
-        bottom_friction_vec.append(Constant(0.030))
-        bottom_friction_vec.append(Constant(0.040))
-        bottom_friction_vec.append(Constant(0.050))
+        viscosity_vec = []
 
-        self._experiments[name] = {"bottom_friction": bottom_friction_vec}
+        for viscosity in viscosities:
+                viscosity_vec.append(Constant(viscosity))
+
+        b_vec = []
+        v_vec = []
+
+        for b in bottom_friction_vec:
+
+            for v in viscosity_vec:
+
+                b_vec.append(b)
+                v_vec.append(v)
+
+
+        self.add_experiment(name, b_vec, v_vec)
+
+
+    def add_experiment(self, experiment_name, bottom_friction_vec, viscosity_vec):
+
+        key = ("bottom_friction", "viscosity")
+        items = list(list(zip(np.array(bottom_friction_vec),np.array(viscosity_vec))))
+
+        print("Number of experiments: {}".format(len(items)))
+
+        self._experiments[experiment_name] = {key: items}
 
 
     def __call__(self, experiment_name):
+
 
         return self._experiments[experiment_name]
 
@@ -46,7 +63,7 @@ if __name__ == "__main__":
 
     experiments = Experiments()
 
-    experiment_name = "Bottom_Friction"
+    experiment_name = "Bottom_Friction_Viscosity"
 
-    e = experiments(experiment_name)
-    print(e["bottom_friction"])
+    experiment = experiments(experiment_name)
+    print(experiment[("bottom_friction", "viscosity")][0])

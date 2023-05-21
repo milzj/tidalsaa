@@ -7,7 +7,7 @@ from smoothed_plus import smoothed_plus
 
 class RandomField(object):
 
-	def __init__(self, mean=0, l=0.5, m=200, mu = 0.025, scale=1.0):
+	def __init__(self, number_samples = 1000, mean=0.025, l=0.5, m=100, mu = 0.025, scale=0.05):
 		"""
 		Implements the random field used in sect. 4.2 in Ref. [1]
 
@@ -40,6 +40,17 @@ class RandomField(object):
 		indices = list(itertools.product(range(1,self.m), repeat=2))
 		indices = sorted(indices, key=lambda x:x[0]**2+x[1]**2)
 		self.indices = indices[0:self.m]
+
+		self.indices = indices[0:self.m]
+
+		xi_mat = []
+		for i in range(number_samples):
+			self.bump_seed()
+			np.random.seed(self.version)
+			xi = np.random.uniform(-1.0, 1.0, self.m)
+			xi_mat.append(xi)
+			
+		self.xi_mat = xi_mat
 
 	def bump_seed(self):
 		self.version += 1
@@ -97,10 +108,10 @@ class RandomField(object):
 
 		return interpolate(Constant(self.mean), V)
 
-	def sample(self):
-		return self.realization()
+	def sample(self, sample_index):
+		return self.realization(sample_index)
 
-	def realization(self):
+	def realization(self, sample_index):
 		"""Computes a realization of the random field.
 
 		The seed is increased by one.
@@ -114,9 +125,7 @@ class RandomField(object):
 		scale = self.scale
 		rf_max = self.random_field_max
 
-		self.bump_seed()
-		np.random.seed(self.version)
-		xi = np.random.uniform(-1.0, 1.0, self.m)
+		xi = self.xi_mat[sample_index]
 
 		y = self.mean_field().vector().get_local()
 

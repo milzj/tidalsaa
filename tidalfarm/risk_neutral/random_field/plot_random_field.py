@@ -17,7 +17,7 @@ N = 128 # number of samples
 random_problem = RandomTidalfarmProblem()
 control_space = random_problem.control_space
 
-rf = RandomField(scale=0.02)
+rf = RandomField(scale=0.05)
 rf.function_space = control_space
 
 rf.plot_eigenvalues(outdir)
@@ -25,9 +25,9 @@ rf.plot_eigenvalues(outdir)
 
 for j in range(N):
 
-    u = rf.sample()
+    u = rf.sample(j)
 
-    filename = "random_field_seed_" + str(rf.version)
+    filename = "random_field_seed_" + str(j)
 
     c = plot(u)
     cb = plt.colorbar(c, label="Turbine density", shrink=1, orientation="horizontal")

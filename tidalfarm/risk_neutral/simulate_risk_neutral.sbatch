@@ -8,7 +8,7 @@
 #SBATCH -o output/Report-%x-%j.out                         # Combined output and error messages file
 #SBATCH --mail-type=ALL              # Mail preferences
 #SBATCH --mail-user=jmilz3@gatech.edu
-#SBATCH --time=01:15:00
+#SBATCH --time=12:00:00
 
 cd $HOME/tidalsaa/tidalfarm/risk_neutral
 

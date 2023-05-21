@@ -35,8 +35,8 @@ if __name__ == "__main__":
     a = 0.0
     b = 1.0
 
-    std = 0.01
-    m = 20
+    std = 0.001
+    m = 7
     sampler = TidalfarmSampler(m=m, a=a, b=b, loc=loc, std=std)
     print(min(sampler._samples))
     print(max(sampler._samples))

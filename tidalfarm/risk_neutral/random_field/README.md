@@ -1,1 +1,9 @@
 Source: https://github.com/milzj/SAA4PDE/tree/consistency/simulations/semilinear_consistency
+
+
+# integrate (2 cos(pi x/1000) cos(pi y/2000)/sqrt(1000*2000))^2 for x=0..1000 and y=0..2000
+
+https://www.wolframalpha.com/input?i=integrate+%282+cos%28pi+x%2F1000%29+cos%28pi+y%2F2000%29%2Fsqrt%281000*2000%29%29%5E2+for+x%3D0..1000+and+y%3D0..2000
+
+
+# 

@@ -12,6 +12,7 @@ from tidalfarm.random_problem import GlobalReducedSAAFunctional
 
 from tidalfarm_sampler import TidalfarmSampler
 
+from random_field import RandomField
 
 import moola
 import fw4pde
@@ -68,7 +69,10 @@ ctrl = Control(control)
 
 
 number_samples = 2**m
-sampler = TidalfarmSampler(d=1, m=m, loc=loc, a=a, b=b, std=std)
+#sampler = TidalfarmSampler(d=1, m=m, loc=loc, a=a, b=b, std=std)
+sampler = RandomField(scale=0.05)
+sampler.function_space = control_space
+
 global_saa_rf = GlobalReducedSAAFunctional(random_problem, control, sampler, number_samples)
 
 

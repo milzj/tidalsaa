@@ -42,7 +42,7 @@ class RandomTidalfarmProblem(RandomProblem):
 
     def __call__(self, control, bottom_friction_value):
 
-        self.tidal_problem.tidal_parameters.bottom_friction = Constant(bottom_friction_value)
+        self.tidal_problem.tidal_parameters.bottom_friction = bottom_friction_value
 
         return self.tidal_problem(control)
 

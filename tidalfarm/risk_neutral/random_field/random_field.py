@@ -3,7 +3,11 @@ import itertools
 from fenics import *
 from dolfin_adjoint import *
 
-from smoothed_plus import smoothed_plus
+def smoothed_plus(x, mu):
+    if x >= 0.0:
+        return x+mu*np.logaddexp(0.0, -x/mu)
+    else:
+        return mu*np.logaddexp(x/mu, 0.0)
 
 class RandomField(object):
 
@@ -49,7 +53,7 @@ class RandomField(object):
 			np.random.seed(self.version)
 			xi = np.random.uniform(-1.0, 1.0, self.m)
 			xi_mat.append(xi)
-			
+
 		self.xi_mat = xi_mat
 
 	def bump_seed(self):
@@ -68,6 +72,8 @@ class RandomField(object):
 		"""Computes eigenvalues and eigenfunctions."""
 
 		function_space = self.function_space
+		mesh = function_space.mesh()
+		mpi_comm = mesh.mpi_comm()
 
 		eigenvalues = np.zeros(len(self.indices))
 		eigenfunctions = []
@@ -79,7 +85,7 @@ class RandomField(object):
 			eigenvalue = .25/((j**2*k**2)*self.l**2)
 			eigenvalues[i] = eigenvalue
 
-			fun = Expression("2.0*cos(pi*j*x[0]/1000)*cos(pi*k*x[1]/2000)", j=j, k=k, degree=1)
+			fun = Expression("2.0*cos(pi*j*x[0]/1000)*cos(pi*k*x[1]/2000)", j=j, k=k, degree=0, domain=mesh, mpi_comm = mpi_comm)
 
 			eigenfunction = interpolate(fun, function_space)
 			eigenfunctions.append(eigenfunction)

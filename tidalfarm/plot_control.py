@@ -27,9 +27,7 @@ control = Function(control_space)
 
 scaling = 1
 scaling = 100.0/max(u_vec)
-
 control.vector()[:] = scaling*u_vec
-
 plt.set_cmap("coolwarm")
 c = plot(control)
 plt.gca().set_xlabel("meters")

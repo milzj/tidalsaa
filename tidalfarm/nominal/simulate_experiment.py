@@ -73,8 +73,9 @@ beta = tidal_problem.beta
 lb = tidal_problem.lb
 ub = tidal_problem.ub
 scaled_L1_norm = fw4pde.problem.ScaledL1Norm(control_space,beta)
-ctrl = Control(control)
 J = tidal_problem(control)
+
+ctrl = Control(control)
 rf = ReducedFunctional(J, ctrl)
 
 # Optimization problem

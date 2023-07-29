@@ -30,7 +30,7 @@ for j in range(N):
     filename = "random_field_seed_" + str(j)
 
     c = plot(u)
-    cb = plt.colorbar(c, label="Turbine density", shrink=1, orientation="horizontal")
+    cb = plt.colorbar(c, label="Magnitude", shrink=1, orientation="horizontal")
 
     plt.savefig(outdir + filename + ".pdf", bbox_inches="tight")
     plt.savefig(outdir + filename + ".png", bbox_inches="tight")

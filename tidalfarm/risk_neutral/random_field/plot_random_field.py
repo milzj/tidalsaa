@@ -12,7 +12,7 @@ if not os.path.exists(outdir):
     os.makedirs(outdir)
 
 
-N = 20 # number of samples
+N = 100 # number of samples
 
 random_problem = RandomTidalfarmProblem()
 control_space = random_problem.control_space

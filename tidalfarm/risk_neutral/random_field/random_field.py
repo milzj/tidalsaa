@@ -88,6 +88,7 @@ class RandomField(object):
         eigenvalues = np.zeros(len(self.indices))
         eigenfunctions = []
 
+        _addends = []
 
         for i, pair in enumerate(self.indices):
             j, k = pair[0], pair[1]
@@ -99,9 +100,12 @@ class RandomField(object):
 
             eigenfunction = interpolate(fun, function_space)
             eigenfunctions.append(eigenfunction)
+            _addends.append(eigenfunction.vector().get_local())
 
         self.eigenvalues = eigenvalues
         self.eigenfunctions = eigenfunctions
+
+        self.addends = np.vstack(_addends).T
 
     def plot_eigenvalues(self, outdir):
 
@@ -127,6 +131,35 @@ class RandomField(object):
 
     def sample(self, sample_index):
         return self.realization(sample_index)
+
+    def realization_(self, sample_index):
+        """Computes a realization of the random field.
+
+        The seed is increased by one.
+
+        Note:
+        -----
+        The sum defining the truncated KL expansion is evaluated from smallest
+        to largest eigenvalue.
+        """
+        mu = self.mu
+        scale = self.scale
+        rf_max = self.random_field_max
+
+        addends = self.addends
+        values = self.eigenvalues
+        xi = np.sqrt(values) * self.xi_mat[sample_index]
+        f = Function(self.function_space)
+
+        y = self.mean_field().vector().get_local()
+        y += addends @ xi
+
+        # f.vector()[:] = np.maximum(y, 0.0)
+        # f.vector()[:] = [ (scale/rf_max)*smoothed_plus(y[i], mu) for i in range(len(y)) ]
+        f.vector()[:] = scale*np.exp(y/rf_max)
+        # f.vector()[:] = scale*np.abs(y)/rf_max
+
+        return f
 
     def realization(self, sample_index):
         """Computes a realization of the random field.

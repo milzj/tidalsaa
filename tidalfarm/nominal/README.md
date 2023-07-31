@@ -109,7 +109,10 @@ We use [$\beta = 4800$](https://www.wolframalpha.com/input?i=1*%281-0.4%29*1000*
 
 The farm site's area is [150000 m^2](https://www.wolframalpha.com/input?i=%28650-350%29*%281250-750%29).
 
-## Uncertain bottom friction and viscosity
+## Uncertain bottom friction and viscosity: A case study
+
+Are optimal turbine densities sensitive towards changes in bottom friction and viscosity? To shed light on this question, we compute optimal turbine densities for several bottom friction and viscosity parameters. 
+[Kreitmeier, Draper, Borthwick, and van den Bremer](https://royalsocietypublishing.org/doi/full/10.1098/rsos.180941) analyze the effect of uncertain bottom friction on estimates of tidal current power.
 
 ![](output/Bottom_Friction_Viscosity/29-Jul-2023-16-57-27/bottom_friction_0.001_viscosity_1.0/solution_best_n_100_friction_0.001_viscosity_1.0.png)
 |:--:| 
@@ -123,6 +126,12 @@ The farm site's area is [150000 m^2](https://www.wolframalpha.com/input?i=%28650
 ![](output/Bottom_Friction_Viscosity/29-Jul-2023-16-57-27/bottom_friction_0.016_viscosity_2.0/solution_best_n_100_friction_0.016_viscosity_2.0.png)
 |:--:| 
 *Optimal turbine density with bottom friction 0.016 and viscosity 2.0*
+
+
+
+![](output/Bottom_Friction_Viscosity/29-Jul-2023-16-57-27/bottom_friction_0.016_viscosity_5.0/solution_best_n_100_friction_0.016_viscosity_5.0.png)
+|:--:| 
+*Optimal turbine density with bottom friction 0.016 and viscosity 5.0*
 
 
 ## References

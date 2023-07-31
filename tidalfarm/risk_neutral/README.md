@@ -14,7 +14,6 @@ instead of $S(u)$ hightlightes dependence on the simulation output on parameters
 ![](https://github.com/milzj/tidalsaa/blob/nominal/tidalfarm/nominal/output/10-May-2023-13-44-27_solution_best_n%3D100_online_version.png)
 |:--:| 
 *Nominal optimal turbine density (with fixed bottom friction)*
-
 ![](https://github.com/milzj/tidalsaa/blob/nominal/tidalfarm/nominal/output/10-May-2023-13-44-27_solution_best_n%3D100_online_version.png)
 |:--:| 
 *Risk-neutral optimal turbine density (with uncertain bottom friction)*

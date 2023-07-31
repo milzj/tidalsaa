@@ -7,7 +7,7 @@ $$
 	\min_{u \in U_{\text{ad}}}  \mathbb{E}[J(S(u,\xi)),u)] + \beta \\|u\\|_{L^1(D)},
 $$
 
-where $J$, $\beta$, $S(u,\xi)$ are as described in ["Optimization problem"](../tidalfarm/nominal#optimization-problem), but the notation $S(u,\xi)$
+where $J$, $\beta$, $S(u,\xi)$ are as described in ["Optimization problem"](../nominal#optimization-problem), but the notation $S(u,\xi)$
 instead of $S(u)$ hightlightes dependence on the simulation output on parameters $\xi$, such as bottom friction. Solutions to the risk-neutral optimization problem perform best on average
 with the average computed over the parameter values $\xi$. Using samples or data $\xi^1, \ldots, \xi^N$ of the parameter values, we approximate the risk-neutral problem using
 the [sample average approximation (SAA)](https://doi.org/10.1137/S1052623499363220). We obtain the SAA problem

@@ -3,7 +3,7 @@
 We use a truncated series expansion of the form
 
 $$
-  \kappa(x,\xi) = \kappa_0 + \sum_{k, j=1}^p  \lambda_k  \Big( \frac{1}{\sqrt{\ell_1\ell_2}2 \cos(\pi j x/\ell_1) \cos(\pi k y/\ell_2) \Big),
+  \kappa(x,\xi) = \kappa_0 + \sum_{k, j=1}^p  \frac{\lambda_{k,j}}{\sqrt{\ell_1\ell_2}}  \big( 2 \cos(\pi j x/\ell_1) \cos(\pi k y/\ell_2) \Big),
 $$
 
 where $\ell_1 = 1000$, $\ell_2 = 2000$. We have

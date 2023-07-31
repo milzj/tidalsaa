@@ -116,6 +116,13 @@ The farm site's area is [150000 m^2](https://www.wolframalpha.com/input?i=%28650
 *Optimal turbine density with bottom friction 0.001 and viscosity 1.0*
 
 
+![](output/Bottom_Friction_Viscosity/29-Jul-2023-16-57-27/bottom_friction_0.0035_viscosity_5.0/solution_best_n_100_friction_0.0035_viscosity_5.0.png)
+|:--:| 
+*Optimal turbine density with bottom friction 0.0035 and viscosity 5.0*
+
+![](output/Bottom_Friction_Viscosity/29-Jul-2023-16-57-27/bottom_friction_0.016_viscosity_2.0/solution_best_n_100_friction_0.016_viscosity_2.0.png)
+|:--:| 
+*Optimal turbine density with bottom friction 0.016 and viscosity 2.0*
 
 
 ## References

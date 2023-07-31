@@ -13,7 +13,7 @@ Using the conditional gradient method, we can compute a tidal-stream farm layout
 which maximizes energy extraction. The setting used for this application is descriped
 in Chapter 3 of the book [T. Schwedes, D.A. Ham, S.W. Funke, and M.D. Piggott](https://link.springer.com/book/10.1007/978-3-319-59483-5).
 
-![](visualizations/variables_shallow_water-1.png)
+![](./visualizations/variables_shallow_water-1.png)
 |:--:| 
 *Variables of the 1D shallow water equations*
 
@@ -24,7 +24,7 @@ $\eta$ is the gree-surface displacement,
 $h$ is the water depth at rest, and
 $H = \eta + h$ is the total water depth.
 
-![](visualizations/river_segment-1.png)
+![](./visualizations/river_segment-1.png)
 |:--:| 
 *River segment*
 

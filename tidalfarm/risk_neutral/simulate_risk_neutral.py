@@ -70,7 +70,7 @@ ctrl = Control(control)
 
 number_samples = 2**m
 sampler = TidalfarmSampler(d=1, m=m, loc=loc, a=a, b=b, std=std)
-#sampler = RandomField(scale=0.05)
+sampler = RandomField(scale=0.005)
 sampler.function_space = control_space
 
 global_saa_rf = GlobalReducedSAAFunctional(random_problem, control, sampler, number_samples)

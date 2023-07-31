@@ -1,6 +1,6 @@
 # Risk-neutral design optimization of tidal-stream energy farms
 
-Motivated by ["Uncertain bottom friction and viscosity: A case study"](https://github.com/milzj/tidalsaa/tree/nominal/tidalfarm/nominal#uncertain-bottom-friction-and-viscosity-a-case-study),
+Motivated by ["Uncertain bottom friction and viscosity: A case study"](../nominal#uncertain-bottom-friction-and-viscosity-a-case-study),
 we consider the risk-neutral desgin of tidal-streem energy farms 
 
 $$
@@ -21,13 +21,13 @@ $$
 
 ## Simulation output
 
-We compare a solution to the [nominal tidal-stream energy farms optimization problem](https://github.com/milzj/tidalsaa/tree/nominal/tidalfarm/nominal) with a solution to the SAA
+We compare a solution to the [nominal tidal-stream energy farms optimization problem](../nominal) with a solution to the SAA
 problem where $\xi$ is a random field modelling uncertain, spatially varying bottom friction.
 
-![](https://github.com/milzj/tidalsaa/blob/nominal/tidalfarm/nominal/output/10-May-2023-13-44-27_solution_best_n%3D100_online_version.png)
+![](../nominal/output/10-May-2023-13-44-27_solution_best_n%3D100_online_version.png)
 |:--:| 
 *Nominal optimal turbine density (with fixed bottom friction)*
-![](https://github.com/milzj/tidalsaa/blob/nominal/tidalfarm/nominal/output/10-May-2023-13-44-27_solution_best_n%3D100_online_version.png)
+![](../nominal/output/10-May-2023-13-44-27_solution_best_n%3D100_online_version.png)
 |:--:| 
 *Risk-neutral optimal turbine density (with uncertain bottom friction)*
 

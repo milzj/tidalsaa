@@ -109,7 +109,12 @@ We use [$\beta = 4800$](https://www.wolframalpha.com/input?i=1*%281-0.4%29*1000*
 
 The farm site's area is [150000 m^2](https://www.wolframalpha.com/input?i=%28650-350%29*%281250-750%29).
 
-## Simulation output
+## Uncertain bottom friction and viscosity
+
+![](output/Bottom_Friction_Viscosity/29-Jul-2023-16-57-27/bottom_friction_0.001_viscosity_1.0/solution_best_n_100_friction_0.001_viscosity_1.0.png)
+|:--:| 
+*Optimal turbine density with bottom friction 0.001 and viscosity 1.0*
+
 
 
 

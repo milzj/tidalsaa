@@ -9,10 +9,10 @@ from tidalfarm.risk_neutral.random_tidalfarm_problem import RandomTidalfarmProbl
 import os
 outdir = "output/"
 if not os.path.exists(outdir):
-	os.makedirs(outdir)
+    os.makedirs(outdir)
 
 
-N = 128 # number of samples
+N = 20 # number of samples
 
 random_problem = RandomTidalfarmProblem()
 control_space = random_problem.control_space
@@ -29,6 +29,7 @@ for j in range(N):
 
     filename = "random_field_seed_" + str(j)
 
+    plt.set_cmap("coolwarm")
     c = plot(u)
     cb = plt.colorbar(c, label="Magnitude", shrink=1, orientation="horizontal")
 

@@ -77,6 +77,7 @@ class RandomField(object):
     def function_space(self, function_space):
         self._function_space = function_space
         self.eigenpairs()
+        self.mean_field()
 
     def eigenpairs(self):
         """Computes eigenvalues and eigenfunctions."""
@@ -127,12 +128,14 @@ class RandomField(object):
 
         V = self.function_space
 
-        return interpolate(Constant(self.mean), V)
+        self._mean_field = interpolate(Constant(self.mean), V)
+        self._mean_field_vec = self._mean_field.vector().get_local()
+
 
     def sample(self, sample_index):
         return self.realization(sample_index)
 
-    def realization_(self, sample_index):
+    def realization(self, sample_index):
         """Computes a realization of the random field.
 
         The seed is increased by one.
@@ -151,7 +154,7 @@ class RandomField(object):
         xi = np.sqrt(values) * self.xi_mat[sample_index]
         f = Function(self.function_space)
 
-        y = self.mean_field().vector().get_local()
+        y = self._mean_field_vec
         y += addends @ xi
 
         # f.vector()[:] = np.maximum(y, 0.0)
@@ -161,7 +164,7 @@ class RandomField(object):
 
         return f
 
-    def realization(self, sample_index):
+    def realization_(self, sample_index):
         """Computes a realization of the random field.
 
         The seed is increased by one.
@@ -177,7 +180,7 @@ class RandomField(object):
 
         xi = self.xi_mat[sample_index]
 
-        y = self.mean_field().vector().get_local()
+        y = self._mean_field_vec
 
         for i in np.argsort(self.eigenvalues):
 

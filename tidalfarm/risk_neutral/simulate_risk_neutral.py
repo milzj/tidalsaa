@@ -57,21 +57,22 @@ random_problem = RandomTidalfarmProblem()
 control_space = random_problem.control_space
 control = Function(control_space)
 
+
+# sampler
+number_samples = 2**m
+#sampler = TidalfarmSampler(d=1, m=m, loc=loc, a=a, b=b, std=std)
+sampler = RandomField(scale=0.1)
+sampler.function_space = control_space
+
+
 # Objective function
 beta = random_problem.beta
 lb = random_problem.lb
 ub = random_problem.ub
 scaled_L1_norm = fw4pde.problem.ScaledL1Norm(control_space,beta)
-bottom_friction = 0.016
+bottom_friction = sampler.sample(0)
 J = random_problem(control, bottom_friction)
-
 ctrl = Control(control)
-
-
-number_samples = 2**m
-sampler = TidalfarmSampler(d=1, m=m, loc=loc, a=a, b=b, std=std)
-sampler = RandomField(scale=0.005)
-sampler.function_space = control_space
 
 global_saa_rf = GlobalReducedSAAFunctional(random_problem, control, sampler, number_samples)
 

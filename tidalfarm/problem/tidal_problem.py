@@ -51,4 +51,5 @@ class TidalProblem(object):
         rho = self.tidal_parameters.water_density
 
         power_functional = assemble(rho*control*inner(u,u)**1.5*site_dx(1))
+        print("power_functional", power_functional)
         return -WtoMW*power_functional

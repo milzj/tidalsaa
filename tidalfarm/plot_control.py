@@ -1,17 +1,17 @@
 import numpy as np
 from dolfin import *
 
-from domain import *
-from domain_parameters import DomainParameters
-from rectangle_domain import RectangularDomain
+from tidalfarm.problem.domain_parameters import DomainParameters
+from tidalfarm.problem.base.rectangle_domain import RectangularDomain
 
 from tidalfarm.problem.tidal_parameters import TidalParameters
 from tidalfarm.problem.domain_farm import DomainFarm
-from tidalfarm.problem.tidal_parameters import TidalParameters
 from tidalfarm.problem.tidal_problem import TidalProblem
 
 import matplotlib.pyplot as plt
 # plt.rcParams['text.usetex'] = True
+
+import sys
 
 input_filename = "output/" + sys.argv[1]
 u_vec = np.loadtxt(input_filename + ".txt")

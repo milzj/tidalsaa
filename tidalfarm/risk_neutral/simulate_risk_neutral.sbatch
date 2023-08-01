@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -J risk                    # Job name
+#SBATCH -J Tidal-Riskneutral                    # Job name
 #SBATCH --account=gts-jmilz3                     # charge account
 #SBATCH -N 48 --ntasks-per-node=1                  # number of nodes and cores per node
 #SBATCH --mem-per-cpu=16gb                        # Memory per core

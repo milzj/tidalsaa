@@ -1,0 +1,11 @@
+========================================
+Site area (m^2): 144000.0
+Cost coefficient: 4800.0
+Total power: 3.359149e+01
+Total cost: 2.516479e+07
+Total turbine friction: 5.242665e+03
+Average smeared turbine friction: 3.640740e-02
+Total power / total friction: 6.407331e-03
+Friction per discrete turbine: 94.24499999999999
+Estimated number of discrete turbines: 55.6280463443446
+Estimated average power per turbine: 0.6038588756062602

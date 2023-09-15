@@ -1,7 +1,10 @@
 # For projects using Nanoc (http://nanoc.ws/)
+*.swp
+*.sav
 
 # Default location for output (needs to match output_dir's value found in nanoc.yaml)
 output/
+build?
 
 # Temporary file directory
 tmp/nanoc/
